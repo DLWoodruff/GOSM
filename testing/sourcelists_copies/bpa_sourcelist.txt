@@ -1,0 +1,13 @@
+Source(Wind,
+	actuals_file="examples/gosm_test/2012-2013_BPA_forecasts_actuals.csv",
+	forecasts_file="examples/gosm_test/2012-2013_BPA_forecasts_actuals.csv",
+	source_type="wind",
+	segmentation_file="examples/gosm_test/segment_bpa.txt",
+	capacity_file="examples/gosm_test/manual_ub.dat",
+	time_step="H");
+Source(Load,
+	actuals_file="examples/gosm_test/CAiso-TAC_demand_12-15.csv",
+	forecasts_file="examples/gosm_test/CAiso-TAC_demand_12-15.csv",
+	source_type="load",
+	segmentation_file="examples/gosm_test/no_segmentation.txt",
+	time_step="H");

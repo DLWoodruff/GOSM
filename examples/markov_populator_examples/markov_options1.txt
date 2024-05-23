@@ -1,0 +1,8 @@
+command/exec markov_populator.py
+--power-source 2012-2013_BPA_forecasts_actuals.csv
+--start-date 2013-05-01
+--end-date 2013-05-30
+--output-directory markov_output
+--number-of-scenarios 100
+#--consider-forecasts
+#--source-name wind

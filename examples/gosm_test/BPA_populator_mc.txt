@@ -1,0 +1,15 @@
+command/exec populator.py
+
+--start-date 2013-02-03-03:00
+--end-date 2013-02-03-03:00
+
+--load-scaling-factor 0.045
+
+--output-directory gosm_test/bpa_output_6
+--scenario-creator-options-file gosm_test/BPA_scenario_creator_mc.txt
+#--sources-file gosm_test/bpa_sourcelist_bus1.csv
+--sources-file gosm_test/bpa_sourcelist_bus1.txt
+#--sources-file gosm_test/bpa_sourcelist_5min.txt
+--allow-multiprocessing 0
+
+--traceback

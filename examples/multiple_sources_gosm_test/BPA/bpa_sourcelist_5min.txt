@@ -1,0 +1,20 @@
+Source(Wind,
+	actuals_file="gosm_test/all_bpa_data_ts_5min.csv",
+	forecasts_file="gosm_test/all_bpa_data_ts_5min.csv",
+	source_type="wind",
+	segmentation_file="gosm_test/segment_bpa.txt",
+	capacity_file="gosm_test/fake_capacity.dat",
+	time_step="5T");
+#Source(Wind2,
+#	actuals_file="gosm_test/2012-2013_BPA_forecasts_actuals.csv",
+#	forecasts_file="gosm_test/2012-2013_BPA_forecasts_actuals.csv",
+#	source_type="wind",
+#	segmentation_file="gosm_test/segment_bpa.txt",
+#	capacity_file="gosm_test/manual_ub.dat",
+#	is_deterministic="True");
+Source(Bus1,
+	actuals_file="gosm_test/fake_demand_ts_5T.csv",
+	forecasts_file="gosm_test/fake_demand_ts_5T.csv",
+	source_type="load",
+	segmentation_file="gosm_test/no_segmentation.txt",
+	time_step="5T");

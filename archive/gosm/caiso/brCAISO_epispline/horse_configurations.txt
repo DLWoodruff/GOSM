@@ -1,0 +1,29 @@
+# horse_configurations.txt
+# This file will specify the configurations for a collection of experiments
+
+Horse: Cutpoints0.1,0.9
+
+Populator Options:
+--start-date 2016-05-02
+--end-date 2016-05-03
+--sources-file ./brCAISO_epispline/sources.txt
+--load-scaling-factor 0.045
+--output-directory wecc_horse_outputs/cp_0.1_0.9/populator
+--scenario-creator-options-file ./brCAISO_epispline/wecc_scenario.txt
+--allow-multiprocessing 0
+--traceback
+
+Simulator Options:
+--simulate-out-of-sample
+--model-directory ../models/knueven
+#--solver gurobi
+--plot-individual-generators
+--traceback
+--solve-with-ph 1
+--output-sced-initial-conditions
+--output-sced-demands
+--output-sced-solutions
+--output-ruc-initial-conditions
+--output-ruc-solutions
+--output-ruc-dispatches
+--output-directory wecc_horse_outputs/cp_0.1_0.9/simulator

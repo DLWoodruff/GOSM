@@ -1,0 +1,10 @@
+command/exec scenario_creator.py
+--sources-file ../data/utah_sources.txt
+--output-directory utah_outputs
+--hyperrectangles-file ../data/hyperrectangle_names_1source.dat
+--scenario-template-file ../data/utah_template.dat
+--dps-file ../data/dps.dat 
+--tree-template-file ../data/TreeTemplate.dat
+--reference-model-file ../../prescient/prescient/models/latorre/ReferenceModel.py
+--load-scaling-factor 0.1
+--scenario-day 2016-06-01

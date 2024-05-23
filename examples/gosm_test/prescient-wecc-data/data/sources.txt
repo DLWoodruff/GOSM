@@ -1,0 +1,13 @@
+Source(BPA-Wind,
+	actuals_file="../data/all_bpa_data.csv",
+	forecasts_file="../data/all_bpa_data.csv",
+	source_type="wind",
+	segmentation_file="../data/segment_bpa.txt",
+	time_step="H",
+	capacity_file="../data/fake_capacity.dat"
+	);
+
+Source(SingleBus,
+	actuals_file="../data/wecc_load_date_adjusted.csv",
+	forecasts_file="../data/wecc_load_date_adjusted.csv",
+	source_type="load");

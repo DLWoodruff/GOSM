@@ -1,0 +1,17 @@
+command/exec scenario_creator.py
+
+--use-markov-chains
+--copula-random-walk
+--planning-period-length 10H
+
+# Options regarding file in- and output:
+--sources-file gosm_test/bpa_sourcelist.txt
+--output-directory gosm_test/output_scenario_creator
+--scenario-template-file gosm_test/simple_nostorage_skeleton.dat
+--tree-template-file gosm_test/TreeTemplate.dat
+--reference-model-file ../models/knueven/ReferenceModel.py
+--number-scenarios 10
+
+# General options:
+--scenario-day 2015-06-30
+--wind-frac-nondispatch=0.50

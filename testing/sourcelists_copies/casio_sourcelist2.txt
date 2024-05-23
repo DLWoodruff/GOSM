@@ -1,0 +1,13 @@
+Source(SolarNP15,
+	actuals_file="examples/multiple_sources_gosm_test/CAISO/data/Solar/solar_forecast_actual_NP15_070114_063015.csv",
+	forecasts_file="examples/multiple_sources_gosm_test/CAISO/data/Solar/solar_forecast_actual_NP15_070114_063015.csv",
+	source_type="solar",
+	segmentation_file="examples/multiple_sources_gosm_test/segment_solar.txt",
+	diurnal_pattern_file="examples/multiple_sources_gosm_test/CAISO/data/Solar/Diurnal_pattern_CAISO_NP15_COPY.csv",
+	time_step="H");
+Source(Bus1,
+	actuals_file="examples/multiple_sources_gosm_test/CAISO/data/Load/caiso_load_070114_063015.csv",
+	forecasts_file="examples/multiple_sources_gosm_test/CAISO/data/Load/caiso_load_070114_063015.csv",
+	source_type="load",
+	segmentation_file="examples/multiple_sources_gosm_test/no_segmentation.txt",
+	time_step="H");

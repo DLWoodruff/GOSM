@@ -1,0 +1,11 @@
+
+command/exec <script>
+
+# <script> is the python script you want to run
+
+-- <option 1> <value 1>
+-- <option 2> <value 2>
+...
+-- <option n> <value n>
+
+# list of required and extra options followed by their set values

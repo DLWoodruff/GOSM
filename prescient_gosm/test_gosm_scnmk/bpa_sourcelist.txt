@@ -1,0 +1,16 @@
+Source(Bus1,
+	actuals_file="../../examples/gosm_test/CAiso-TAC_demand_12-15.csv",
+	forecasts_file="../../examples/gosm_test/CAiso-TAC_demand_12-15.csv",
+	segmentation_file="../../examples/gosm_test/no_segmentation.txt",
+	source_type="load",
+	time_step="H");
+Source(Wind,
+	actuals_file="../../examples/gosm_test/2012-2013_BPA_forecasts_actuals.csv",
+	capacity_file="../../examples/gosm_test/manual_ub.dat",
+	forecasts_file="../../examples/gosm_test/2012-2013_BPA_forecasts_actuals.csv",
+	segmentation_file="../../examples/gosm_test/segment_bpa.txt",
+	source_type="wind",
+	time_step="H");
+
+# Copy of sourclist to alleviate directory paths
+

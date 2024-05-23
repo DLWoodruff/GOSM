@@ -1,0 +1,112 @@
+\section{Theoretical background}\label{theo}
+
+The goal is to get a method for evaluating how accurate a computed copula fits the given data. At the end we want compare different computed copulas and see which one performs better in describing the dependence between the several marginals.
+
+\subsection{Unreproducibility}\label{unrep}
+
+For each day the copula is computed using the specific historical data for that day. But the actuals of each day are observed only once. Thus, for each day there is a different copula computed and only one observation made. Therefore, a statement about the quality of each of these copulas is not possible. Not even a statement about the general way of computing the copulas is possible.\\
+
+For the purpose of evaluating the quality of the whole method, we use the probability integral transformation\footnote{see \cite{stats}}:
+
+\begin{theorem}\label{pit}
+	If a random variable $X$ has a continuous distribution function $F(x)$, then the random variable $U=F(X)$ has a uniform distribution on the interval $(0,1)$, that is, $U$ is a $U(0,1)$ random variable.
+\end{theorem}
+
+We define the random variable $U_{j}=F_{j}(O_{j})$ for each day $j$, where $O_{j}$ is the observation from day $j$ and $F_{j}$ the computed distribution for day $j$. Theorem \ref{pit} says, that $U$ is uniformly distributed, if $F$ is the real density function for the observation. If you repeat this step for more days, then you get a sample $\boldsymbol{U}=(U_{1}, U_{2},\dots , U_{n})$ which is computed independently. All in all this sample should be independent and uniformly distributed.\\
+
+Now, to make a statement about the quality of our general procedure for computing the copula, we have to measure the difference between the empirical distribution of the sample $U$ and the uniform distribution. In a perfect case, the empirical distribution would be uniform and the distance would be zero. So, the lower the distance is, the better the general method works.
+
+\subsection{Rank histograms}\label{rank}
+
+One method to evaluate the distance from the uniform distribution are rank histograms. The idea is to produce a plot of the empirical distribution of $U$ and compare it to the plot of a uniform distribution on the interval $(0,1)$ (i.e. equals $1$ between $0$ and $1$, and equals $0$ elsewhere). The theory behind this idea is explained in \cite{rank histo}.\\
+
+The main problems of rank histograms are that they are only useful in one dimension and the question how to decide which copula is closer to the uniform distribution by just seeing the plot. We solve the first issue by projecting the samples onto one dimension \footnote{see section \ref{diag} "Diagonal"} and the other by using a specific metric: the Earth Mover's Distance or Wasserstein Distance.  
+
+\subsection{Earth Mover's Distance / Wasserstein Distance}\label{emd}
+
+The Earth Mover's Distance or Wasserstein Distance is a very nice tool for measuring the distance between two histograms or more general between two probability density functions. In this approach we are using the Wasserstein Distance from scipy.stats, which is defined as follows \footnote{see \cite{scipy}}:
+
+\begin{definition}\label{WD}
+	The first Wasserstein Distance between $u$ and $v$ is:
+	\begin{equation*}
+		l_{1}(u,v)=\inf_{\pi \in \Gamma(u,v)}\int_{\mathbb{R}\times\mathbb{R}}|x-y|d\pi(x,y)
+	\end{equation*}
+	
+	where $\Gamma(u,v)$ is the set of (probability) distributions on $\mathbb{R}\times\mathbb{R}$ whose marginals are $u$ and $v$ on the first and second factors respectively.
+	If $U$ and $V$ are the respective CDF's of $u$ and $v$, this distance equals to:
+	
+	\begin{equation*}
+		l_{1}(u,v)=\int_{-\infty}^{+\infty}|U-V|
+	\end{equation*}
+	
+	The input distributions can be empirical, therefore coming from samples whose values are effectively inputs of the function, or they can be seen as generalized functions, in which case they are weighted sums of Dirac delta functions located at the specified values.
+\end{definition}
+
+The last sentence in Definition \ref{WD} means, that the distance between two distributions can be computed by using samples from these distributions.\\
+
+(Please note, that Ma{\"e}l Forcier implemented the Earth Mover's Distance for his own. This code is usable in this script, too. But usually we use the Wasserstein Distance from scipy.stats. For more information about Ma{\"e}l Forciers code refer to his report "Research Internship Report".)
+
+\subsection{Diagonal}\label{diag}
+
+To get one dimensional samples (which are originally at least two dimensional in our case), we have to project them onto an one dimensional space. Regarding the dependence, the projection onto the marginal space would make no sense. Therefore we are projecting the data on one of the diagonals. Ma{\"e}l Forcier implemented some code for this purpose and explained it in his report "Research Internship Report". We are using the same code and provide his explanation in the next paragraphs.\\
+
+\subsubsection{Projection on the diagonal}
+
+First of all some definitions:
+
+\begin{definition}\label{Corner}
+	A \textbf{corner} of an hypercube $[0,1]^d$ is a point $\boldsymbol{a}=(a_{1},\dots,a_{d})\in\{0,1\}^d$. So there are $2^d$ corners in a hypercube of dimension d. 
+\end{definition}
+
+\begin{definition}
+	A \textbf{diagonal} $\Delta$ is a segment which links to opposite corner $\boldsymbol{a}$ and $\boldsymbol{b}$:
+	\begin{equation*}
+		\Delta = [\boldsymbol{a},\boldsymbol{b}],\quad \textrm{where} \quad \forall i=1,\dots,d: a_{i}=0 \Leftrightarrow b_{i}=1
+	\end{equation*}
+	Alternatively:
+	\begin{equation*}
+		\Delta =\{(1-\lambda)\boldsymbol{a}+\lambda\boldsymbol{b}, \lambda \in [0,1]\} \quad \textrm{where} \quad \forall i=1,\dots,d: a_{i}=b_{i}+1\mod 2
+	\end{equation*}
+	Because one diagonal can be written as $[\boldsymbol{a},\boldsymbol{b}]$ or $[\boldsymbol{b},\boldsymbol{a}]$, we will always consider $a_{1}=0$ so that each diagonal has a unique way notation.
+\end{definition}
+
+\begin{definition}
+	We can also define the \textbf{direction} of a diagonal as the vector:
+	\begin{equation*}
+		U_{\Delta}=\frac{1}{\sqrt{d}}(\boldsymbol{b}-\boldsymbol{a})
+	\end{equation*}
+\end{definition}
+
+\begin{definition}\label{matrix}
+	The \textbf{matrix of projection} on the linear space will be:
+	\begin{equation*}
+		M_{\Delta}=U_{\Delta}U_{\Delta}^{T}
+	\end{equation*}
+	Finally, the \textbf{projection on the diagonal} which is an affine space is the function $P_{\Delta}$ such that:
+	\begin{equation*}
+		P_{\Delta}(X)+M_{\Delta}(X-C)+C,
+	\end{equation*}
+	with $C=(\frac{1}{2},\dots,\frac{1}{2})$.
+\end{definition}
+
+\begin{remark}
+	So there are $2^{d-1}$ diagonals, directions and matrices of projection in an hypercube of dimension $d$. The division by $\sqrt{d}$ in the definition of direction permits to have a unit vector. $M$ is indeed a matrix thanks to the order of the factors (and not a scalar product like $U^{T}U)$. One should not confuse the matrix of projection on the linear space with the traditional projection on the diagonal. That is why we need to translate everything with the center $C$ of the hypercube.
+\end{remark}
+
+\subsubsection{Distribution on the diagonal}
+
+We now want to study the distribution of the points projected on the diagonal to compare it to a uniform distribution. Since the diagonal is a segment, each point $x$ of the diagonal can be described by only one scalar number $\lambda$: $x=(1-\lambda)a+\lambda b)$ (definition of the diagonal). $\lambda$ can be understood as the normalized distance between $a$ and $x$:
+
+\begin{equation*}	
+	||x-a||=||(1-\lambda) a + \lambda b-a||= \lambda ||a-b|| = \lambda \sqrt{d}
+\end{equation*}
+
+Where $||\cdot||$ is a norm in our space.
+
+But $\lambda$ can be easily evaluated by taking the first coordinates of $x$:
+
+\begin{equation*}
+	x_{1}=(1-\lambda)a_{1}+\lambda b_{1}=(1-\lambda)\cdot 0 + \lambda \cdot 1=\lambda
+\end{equation*}
+
+This equality is valid thanks to our useful convention $(a_{1},b_{1})=(0,1)$. Now we have a unique number that should be uniformly distributed on $[0,1]$.

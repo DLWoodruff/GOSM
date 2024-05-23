@@ -1,0 +1,6 @@
+command/exec populator.py
+--start-date 2016-06-01
+--end-date 2016-08-30
+--scenario-creator-options-file wecc_scenario.txt
+--sources-file ../data/sources.txt
+--traceback

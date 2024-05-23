@@ -1,0 +1,72 @@
+\section{Theory}
+
+In this section we will explain the theory behind the Markov Chain Random Walk and using copulas for multiple sources. The purpose of this Markov Chain Random Walk is to generate power production scenarios for the next planning period. A scenario is a vector of power values for each specific time point in the planning period for each power source (i.e. if you have 3 different power sources, the scenario will contain 3 vectors of power values). These vectors are computed by the Markov Chain Random Walk through the space of errors. Random Walk refers to the fact that we are going randomly from one state to the next one. In our case a state is an error value for each power source at one time point in the planning period. The following basic algorithm shows how the Markov Chain Random Walk looks like:\\
+
+\begin{enumerate}
+	\item Get a start state.
+	\item Set the start state as the current state.
+	\item Fit a marginal distribution (i.e. one dimensional distribution) to the historic error data of each source for the time point of the current state and for the time point of the next state. That means, if there are 2 sources, there will be 4 marginal distributions. If there are 3 sources, there will be 6 marginals and so on.
+	\item Use the marginal's cdf to transform the error data of each dimension into the unit interval $[0,1]$. After that, fit a copula to these transformed data sets. (The transformation must be done, because a copula C is defined as a distribution function $C: [0,1]^n \rightarrow [0,1]$ ) 
+	\item Sample a next state from the conditional distribution, which is defined by the copula conditioned on being in the current state (i.e. the transition probability for the random walk is the probability to get into a specific next state while being in the current state).
+	\item Add this next state to the list of states of the random walk. Set computed next state as the current state and return to 3.
+\end{enumerate}
+
+Repeat this algorithm until a state for every time point in the planning period is computed.
+
+
+\subsection{How to sample from a Multidimensional distribution}
+
+The general idea of this method is to divide every dimension into slices. After that a one dimensional distribution is layered over the slices. Through inverse sampling of this one dimensional distribution, it is determined which slice is chosen to continue this process (i.e. this slice was divided into slices as well, so you can repeat the method). For a better understanding we recommend reading this online blog\footnote{\label{blog}url: http://code-spot.co.za/2009/04/15/generating-random-points-from-arbitrary-distributions-for-2d-and-up/}, but we also provide a description of the method for 2 dimensions.\\
+
+\clearpage
+
+\textbf{Method in 2D}
+
+\begin{enumerate}
+	\item Create a grid over the support of the overlying pdf. In our case we are using a copula as the pdf, that means we have to create a grid over $[0,1]^2$. After that, you assign to each cell the probability mass of the pdf conditioned on the current state. It might look like this:
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|} \hline
+			0.0625 & 0.03125 & 0.01875 & 0.025 \\ \hline
+			0.03125 & 0.125 & 0.1875 & 0.00625\\ \hline
+			0.05 & 0.1875 & 0.125 & 0.0125 \\ \hline
+			0.0125 & 0.03125 & 0.03125 & 0.0625 \\ \hline
+		\end{tabular}
+	\end{figure}
+	\item Accumulate each column of the grid. Our above grid will then look like:
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{|c||c||c||c|} \hline
+			0.0625 & 0.03125 & 0.01875 & 0.025 \\ \hline
+			0.09375 & 0.15625 & 0.20625 & 0.03125\\ \hline
+			0.14375 & 0.34375 & 0.33125 & 0.04375 \\ \hline
+			0.15625 & 0.375 & 0.3625 & 0.10625 \\ \hline
+		\end{tabular}
+	\end{figure}
+	\item Now we have to accumulate the last row of the above grid and add a zero in the front. This yields to:
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|} \hline
+			0 & 0.15625 & 0.53125 & 0.89375 & 1 \\ \hline
+		\end{tabular}
+	\end{figure}
+	\item We use these values as the y-values. To get some x-values, we are taking the right bound of each column/cell. These (x,y) value pairs are then used to create a linear interpolation (i.e. this is our one dimensional distribution we need).
+	\item We need to sample a random number from this distribution. Therefore we are using the inverse sampling method. So we need to draw a random number from a uniform distribution which support is $[0,1]$. Next, find the inverse value of this number of your distribution. This is the first dimension of the sample.
+	\item We also need to look in which interval this sampled value falls. This interval will give us the column, where we have to repeat our method. Lets assume the sampled number yields us to the third column. Add a 0 at the beginning and normalize all the values. In the end, our column looks like:
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{|c|}\hline
+			0 \\ \hline
+			0.0517 \\ \hline
+			0.56897 \\ \hline
+			0.9138 \\ \hline
+			1 \\ \hline
+		\end{tabular}
+	\end{figure}
+	\item We start again with step 4, and repeat the interpolation and inverse sampling method to get a sample for the second dimension.
+	\item In the end you will have two samples, each for one dimension. This is our 2D sample from our conditional pdf. Don't forget to convert these sample into error values using the inverse cdf of the respective marginal distribution.
+\end{enumerate}
+
+You can generalize this method to $n$ dimensions. Therefore you have to repeat the accumulation, interpolation and inverse sampling, until you have a sample for each dimension.
+		
+	

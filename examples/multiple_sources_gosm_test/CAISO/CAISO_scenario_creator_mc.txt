@@ -1,0 +1,18 @@
+command/exec scenario_creator.py
+
+--use-markov-chains
+--copula-random-walk
+--planning-period-length 10H
+
+# Options regarding file in- and output:
+--sources-file multiple_sources_gosm_test/CAISO/caiso_sourcelist.txt
+--output-directory multiple_sources_gosm_test/CAISO/output_scenario_creator
+--scenario-template-file multiple_sources_gosm_test/CAISO/caiso_simple_nostorage_skeleton.dat
+--tree-template-file multiple_sources_gosm_test/TreeTemplate.dat
+--reference-model-file ../models/knueven/ReferenceModel.py
+--number-scenarios 1
+
+# General options:
+--scenario-day 2015-06-30
+
+--wind-frac-nondispatch=0.50

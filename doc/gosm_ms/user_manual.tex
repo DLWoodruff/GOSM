@@ -1,0 +1,64 @@
+\section{How to generate scenarios with multiple sources}
+
+\subsection{Option files}
+
+To run GOSM with multiple sources, you will need a couple of option files. The first one is a \emph{populator-file}, which is used to run the \emph{populator.py} script. You have to add the following options in the \emph{populator-file}:
+
+\begin{itemize}
+	\item \textbf{start-date \& end-date}: These dates determine the period for which scenarios are created. Both must be in the format of YYYY-MM-DD-HH:MM.
+	\item \textbf{load-scaling-factor}: A float value for the load scaling factor.
+	\item \textbf{output-directory}: The path that stores the output.
+	\item \textbf{scenario-creator-options-file}: The options file for the scenario creator.
+	\item \textbf{sources-file}: The sourcelist file.
+	\item \textbf{allow-multiprocessing}: Determines if multiprocessing is used or not.
+	\item \textbf{traceback}
+\end{itemize}
+
+According to the populator file, you also have to provide an options file for the scenario creator as well. It has to contain the following options:
+
+\begin{itemize}
+	\item \textbf{use-markov-chains}: Determines if the Markov Chain method is used for generating the scenarios. If this option is set, Markov Chains will be used. (This will be the default method in GOSM 3.0)
+	\item \textbf{copula-random-walk}: Determines if copulas are used for the random walk. Can only be set, if use-markov-chains is also set. For multiple sources, this is a must.
+	\item \textbf{planning-period-length}: The length for the planning or scenario period as an integer directly following by a capital letter, where "H" stands for hours and "T" stands for minutes.
+	\item \textbf{sources-file}: The sourcelist file.
+	\item \textbf{output-directory}: The path which stores the output.
+	\item \textbf{scenario-template-file}: The scenario template file  used for creating the scenarios. For more information look into the User Manual for GOSM 2.0.
+	\item \textbf{tree-template-file}: The tree template file used for creating the scenarios. For more information look into the User Manual for GOSM 2.0.
+	\item \textbf{reference-model-file}: The reference model which is used for creating the scenarios. For more information look into the User Manual for GOSM 2.0.
+	\item \textbf{number-scenarios}: The number of scenarios generated for each day.
+	\item \textbf{scenario-day}: If the scenario creator is run by itself and not by the populator, the scenarios are created for this day only. 
+	\item \textbf{wind-frac-nondispatch}: A float number.
+\end{itemize}
+
+Another useful option for the scenario creator option file is the \textbf{error\_ tolerance} option. More about it is described in the last section.
+
+\subsection{Other files}
+
+\textbf{Sources-file} \\
+
+The sources file includes every source used for generating scenarios (including "load"). Each source has its own entry. Every entry must start with the word "Source", after that the specific attributes of the source are enclosed in parenthesis. Each attribute is separated by a comma and each source is separated by a semicolon. Required attributes are:
+
+\begin{itemize}
+	\item Name: the name of the source
+	\item actuals-file: the file containing the actual data for that source
+	\item forecasts-file: the file containing the forecast data for that source.
+	\item source-type: the type of the source
+	\item segmentation\_file: a file containing information about what type of segmentation will be used
+	\item time\_step: the time step of the actual and forecast data.
+\end{itemize}
+
+Except for the name, every attribute is followed by a equal sign and the value of the attribute inside quotation marks. These attributes must require the directory where the respective file is located. The only source types that are supported are wind and solar. The time step must be an "H" for hours or a "T" for minutes with an optional prefixed number.\\
+
+\textbf{Template-files and Reference-model}\\
+
+Please read the GOSM User Manual for more information about how these files are created and how they look like. In the next section, some example files are provided.
+
+\subsection{How to run GOSM}
+
+If every required options are set and the paths for the files point into the right directory, GOSM is run by the following command:\\
+
+\begin{figure}[H]
+	\begin{framed}
+		runner.py populator\_options.txt
+	\end{framed}
+\end{figure}

@@ -1,0 +1,13 @@
+command/exec populator.py
+
+--start-date 2014-10-03-15:00
+--end-date 2014-10-05-16:00
+
+--load-scaling-factor 0.045
+
+--output-directory multiple_sources_gosm_test/CAISO/caiso_output
+--scenario-creator-options-file multiple_sources_gosm_test/CAISO/CAISO_scenario_creator_mc.txt
+--sources-file multiple_sources_gosm_test/CAISO/caiso_sourcelist.txt
+--allow-multiprocessing 0
+
+--traceback

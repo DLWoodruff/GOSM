@@ -1,0 +1,50 @@
+\section{Algorithm and implementation}\label{alg}
+
+In this section we provide the implemented algorithm and explain it.
+
+\subsection{Algorithm}
+
+This algorithm was first introduced in Ma{\"e}l Forciers report "Research Internship Report". So we used primarily his existing code to implement this algorithm and to run some experiments.
+
+\begin{enumerate}[I.]
+	\item Compute a sample S by doing for each day $j$:
+	\begin{enumerate}[1.]
+		\item Take the historic data and fit a copula to it by doing:
+		\begin{enumerate}[(a)]
+			\item Fit marginal distributions for every hour of interest to the respective data (usually the data is first segmented).
+			\item Transform the data the copula will be fitted to into the copula space (i.e. $[0,1]^d$) using the cumulative distribution functions of the marginals. (for now all the historic data is used to fit the copula to, because we haven't found a good method to segment the data for fitting the copula yet)
+			\item Fit the copula to the transformed data.
+		\end{enumerate}
+		\item Generate a sample $U_{j}$ of $n$ realization of the copula.
+		\item Project $U_{j}$ onto one diagonal $\Delta$ of the copula space:
+		\begin{equation*}
+			V_{\Delta} = (P_{\Delta}(U_{j,1}),\dots,P_{\Delta}(U_{j,d}))
+		\end{equation*}
+		$P_{\Delta}$ is the projection matrix defined in definition \ref{matrix}.
+		\item Take the observation of today $O_{j}$ and transform it to the copula space using the marginals cumulative distribution functions:
+		\begin{equation*}
+			Q_{j}=(F_{j,1}(O_{j,1}),\dots, F_{j,d}(O_{j,d}))
+		\end{equation*}
+		$F_{j,i}$ is the cumulative distribution function of day $j$ and marginal $i$.
+		\item Project $Q_{j}$ onto the same diagonal $\Delta$:
+		\begin{equation*}
+			R_{\Delta}=P_{\Delta}(Q_{j})
+		\end{equation*}
+		\item Compute $S_{j}$:
+		\begin{equation*}
+			S_{j}=F_{\Delta}(R_{\Delta})
+		\end{equation*}
+		$F_{\Delta}(x)=\frac{1}{n}\sum_{k=1}^{d}\mathbbm{1}_{V_{\Delta , k} \leq x}$ is the empirical distribution of $V_{\Delta}$.
+		\item Append the sample $S$ with $S_{j}$.
+	\end{enumerate}
+	\item Evaluate S:
+	\begin{itemize}
+		\item Compute the Wasserstein Distance between $S$ and a uniform random or fixed sample $X$ (which means you are computing the Wasserstein Distance between the empirical distribution of $S$ and the uniform distribution, see Definition \ref{WD}).
+		\item Compute the Earth Mover's Distance between $S$ and a uniform random or fixed sample $X$ (which means you are computing the Earth Mover's Distance between the empirical distribution of $S$ and the uniform distribution, see Definition \ref{WD}).
+		\item Plot the rank histogram of a uniform random or fixed sample $X$ populated with $S$.
+	\end{itemize}
+\end{enumerate}
+
+\subsection{Explanation}
+
+The main theoretical result this algorithm is based on is the Probability Integral Transformation (PIT) \footnote{see Theorem \ref{pit}}. If the copula, which was fitted to the historical data, describes the real distribution of the historical data and todays observations, the generated sample $U_{j}$ and the computed $Q{j}$ must have the same distribution for each day $j$. Thus, the projected samples $V_{\Delta}$ and $R_{\Delta}$ must have the same distribution. Now using the PIT implies that $S=F(R_{\Delta})$, where $F$ is the empirical distribution of $V_{\Delta}$, must be uniformly distributed. That means, the distance from the empirical distribution of the computed (with the algorithm above) sample $S$ and the uniform distribution is a good way to see how accurate the copula describes the real distribution. And of course you can compare different copulas or ways of computing them and evaluate, which one works better for some given data.  

@@ -1,0 +1,18 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Theoretical background}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Unreproducibility}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Rank histograms}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Earth Mover's Distance / Wasserstein Distance}{4}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Diagonal}{4}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}Projection on the diagonal}{4}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}Distribution on the diagonal}{5}{subsubsection.2.4.2}
+\contentsline {section}{\numberline {3}Algorithm and implementation}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Algorithm}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Explanation}{7}{subsection.3.2}
+\contentsline {section}{\numberline {4}Experiments and results}{8}{section.4}
+\contentsline {subsection}{\numberline {4.1}2012-2013 BPA data}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}All BPA data}{14}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}RTS data (area 3)}{20}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}RTS data (area 1)}{26}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}BPA 2012-2017}{32}{subsection.4.5}

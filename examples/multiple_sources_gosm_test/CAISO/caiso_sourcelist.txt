@@ -1,0 +1,18 @@
+Source(Wind_NP15,
+	actuals_file="multiple_sources_gosm_test/CAISO/data/Wind/wind_forecasts_actuals_NP15_070114_063015.csv",
+	forecasts_file="multiple_sources_gosm_test/CAISO/data/Wind/wind_forecasts_actuals_NP15_070114_063015.csv",
+	source_type="wind",
+	segmentation_file="multiple_sources_gosm_test/segment_bpa.txt",
+	time_step="H");
+Source(Wind_SP15,
+	actuals_file="multiple_sources_gosm_test/CAISO/data/Wind/wind_forecasts_actuals_SP15_070114_063015.csv",
+	forecasts_file="multiple_sources_gosm_test/CAISO/data/Wind/wind_forecasts_actuals_SP15_070114_063015.csv",
+	source_type="wind",
+	segmentation_file="multiple_sources_gosm_test/segment_bpa.txt",
+	time_step="H");
+Source(Bus1,
+	actuals_file="multiple_sources_gosm_test/CAISO/data/Load/caiso_load_070114_063015.csv",
+	forecasts_file="multiple_sources_gosm_test/CAISO/data/Load/caiso_load_070114_063015.csv",
+	source_type="load",
+	segmentation_file="multiple_sources_gosm_test/no_segmentation.txt",
+	time_step="H");

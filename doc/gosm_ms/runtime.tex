@@ -1,0 +1,40 @@
+\section{Runtime}
+
+Whenever using more than two sources for the scenario generation, there is considerable slowdown due to the preciseness of Scipy's integration function. The process encounters these integration processes when:
+\begin{enumerate}
+	\item the computation of the marginal distribution of a joint cdf
+	\item when accumulating the grid over the pdf as described in the section above
+\end{enumerate}
+
+The default value for both error tolerances are $1.49e-08$ according to the Scipy integrate.nquad documentation. We will allow for a parameter $ --error\_tolerance $that will increase the run time by increasing the absolute and relative error tolerance for the integration processes. The parameter should be  an integer and will correspond the increase in power of tens to the error tolerance. For example, with $--error\_tolerance=3$, the error tolerance will be $1.49e-05$. As you can imagine, the room for error in the integration increases as a drawback for the decreased run time.\\
+
+We will show two tables that correspond to different scenarios for different power generations. We only analyzed data at one hour with a plannning period length of 5 hours, thus resulting in 10 integration  processes due to both integration for each 5 steps. \\
+
+ Since the sum of the grid pdf integration should result in $1$, from the theory of the section above, we take the error of the actual value of the integration and provide the average over these steps. We also record the average time for both integration processes. Note that this is a general trend that we found, run time differences can be attributed to many factors in your setup. \\
+
+Our table for an hour in  a day where there was mid-level power generated: \\
+
+\begin{tabular}{|p{3cm}||p{3cm}|p{3cm}|p{3cm}|}
+\hline
+Error Tolerance (T) & Average Error of Grid Integration (Difference from $1$) & Average Time for Grid Integration & Average Time for Marginal Integration\\
+\hline
+$T = 0$ or Default & $7.372168 \times 10^{-11}$ &$6.08498$ min &$ 6.779567$ min\\
+$T=1$ or $ \times 10^{1}$ & $1.151786\times 10^{-9}$ & $4.632438$ min & $3.069336$ min\\
+$T=2$ or $\times10^{2}$ & $5.430827 \times 10^{-9}$ & $2.4640618$ min & $2.442976$ min\\
+$T=3$ or $\times10^{3}$ & $1.086908 \times 10^{-6}$ & $1.755044$ min & $1.643237$ min\\
+\hline
+\end{tabular}
+\\
+
+Our table for an hour in a day where there was low-level power generated: \\
+
+\begin{tabular}{|p{3cm}||p{3cm}|p{3cm}|p{3cm}|}
+\hline
+Error Tolerance (T) & Average Error of Grid Integration (Difference from $1$) & Average Time for Grid Integration & Average Time for Marginal Integration\\
+\hline
+$T = 0$ or Default & $ 4.927122\times 10^{-10}$ &$9.902274$ min &$7.629800 $ min\\
+$T=1$ or $ \times 10^{1}$ & $1.152122 \times 10^{-9}$ & $9.751140$ min & $7.752153$ min\\
+$T=2$ or $\times10^{2}$ & $2.419252 \times 10^{-7}$ & $4.366983$ min & $7.481410$ min\\
+$T=3$ or $\times10^{3}$ & $3.929535 \times 10^{-7}$ & $4.126274$ min & $5.315102$ min\\
+\hline
+\end{tabular}

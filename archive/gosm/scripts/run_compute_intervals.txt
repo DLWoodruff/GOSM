@@ -1,0 +1,9 @@
+command/exec compute_intervals.py
+
+--data-file sim/gosm_test/2012-2013_BPA_forecasts_actuals.csv
+--date-time-now 2013-07-02:00:00
+--lead-time 2
+--hour-range-size 2
+--alpha 0.3
+--method 1
+--number-of-days 10

@@ -1,0 +1,10 @@
+\begin{table}[h] 
+    \centering 
+    \begin{tabular}{|l|l|l|l|l|l|l|l|} \hline 
+        \textbf{Diagonal} & \multicolumn{7}{c|}{\textbf{Copula}} \\ \hline 
+        & Gaussian & Gumbel & Frank & Clayton & Empirical & Independence & Student \\ \hline 
+        $[0,0], [1,1]$ & 0.061 & 0.0622 & 0.0614 & 0.0594 & 0.0601 & 0.0845 &  \\ \hline 
+        $[0,1], [1,0]$ & 0.0734 & 0.0477 & 0.0536 & 0.0484 & 0.0448 & 0.1855 &  \\ \hline 
+    \end{tabular} 
+    \caption{Wasserstein distances for 66 observations of pairs of BPA wind forecast errors beginning 2013-10-23:17:00, 2013-10-23:18:00. The copulas were fit  using an average of 484 observations beginning 2012-06-02. The marginals were fit using an average of 194 observations of respective hours (i.e. the  marginals for the two hours were computed separately) with a MW segmentation filter for the marginals of 0.4. The data file used was 2012-2013\_BPA\_forecasts\_actuals.csv.} 
+\end{table}

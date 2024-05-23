@@ -1,0 +1,10 @@
+command/exec scenario_creator.py
+--sources-file ./brCAISO_epispline/sources.txt
+--output-directory wecc_outputs
+--hyperrectangles-file ./brCAISO_epispline/hyperrectangle_names_1source.dat
+--scenario-template-file ./brCAISO_epispline/WECC_skeleton.dat
+#--scenario-template-file  ./gosm_test/simple_nostorage_skeleton.dat
+--dps-file ./brCAISO_epispline/dps.dat 
+--scenario-day 2016-05-02
+--tree-template-file ./brCAISO_epispline/TreeTemplate.dat
+--reference-model-file ./brCAISO_epispline/ReferenceModel.py

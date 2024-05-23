@@ -1,0 +1,14 @@
+command/exec scenario_creator.py
+
+--use-markov-chains
+--copula-random-walk
+--planning-period-length 6H
+
+--sources-file ../data/sources.txt
+--output-directory wecc_outputs
+--scenario-template-file ../data/WECC_skeleton.dat
+--tree-template-file ../data/TreeTemplate.dat
+--reference-model-file ../../../../models/knueven/ReferenceModel.py
+--number-scenarios 10
+
+--scenario-day 2016-06-01

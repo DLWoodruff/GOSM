@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Theoretical background}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Unreproducibility}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Rank histograms}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Earth Mover's Distance / Wasserstein Distance}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Diagonal}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.4.1}{Projection on the diagonal}{subsection.2.4}% 7
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Distribution on the diagonal}{subsection.2.4}% 8
+\BOOKMARK [1][-]{section.3}{Algorithm and implementation}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Algorithm}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Explanation}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Experiments and results}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{2012-2013 BPA data}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{All BPA data}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{RTS data \(area 3\)}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.4}{RTS data \(area 1\)}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.5}{BPA 2012-2017}{section.4}% 17

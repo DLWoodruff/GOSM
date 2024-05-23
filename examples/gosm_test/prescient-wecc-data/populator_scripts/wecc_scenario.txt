@@ -1,0 +1,9 @@
+command/exec scenario_creator.py
+--sources-file ../data/sources.txt
+--output-directory wecc_outputs
+--hyperrectangles-file ../data/hyperrectangle_names_1source.dat
+--scenario-template-file ../data/WECC_skeleton.dat
+--dps-file ../data/dps.dat 
+--tree-template-file ../data/TreeTemplate.dat
+--reference-model-file ../../prescient/prescient/models/knueven/ReferenceModel.py
+--scenario-day 2016-06-01

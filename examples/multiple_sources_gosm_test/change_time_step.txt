@@ -1,0 +1,6 @@
+command/exec change_time_step.py
+
+--source-file gosm_test/fake_demand.csv
+--output-directory gosm_test/
+--time-step 5T
+--change-type smaller

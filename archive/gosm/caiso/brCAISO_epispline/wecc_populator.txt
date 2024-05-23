@@ -1,0 +1,6 @@
+command/exec populator.py
+ 
+--start-date 2016-05-01
+--end-date 2016-05-31
+--scenario-creator-options-file ./brCAISO_epispline/wecc_scenario.txt
+--sources-file ./brCAISO_epispline/sources.txt

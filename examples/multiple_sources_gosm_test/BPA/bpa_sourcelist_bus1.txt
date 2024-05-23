@@ -1,0 +1,28 @@
+Source(Wind,
+	actuals_file="multiple_sources_gosm_test/BPA/data/2012-2013_BPA_forecasts_actuals.csv",
+	forecasts_file="multiple_sources_gosm_test/BPA/data/2012-2013_BPA_forecasts_actuals.csv",
+	source_type="wind",
+	segmentation_file="multiple_sources_gosm_test/segment_bpa.txt",
+	capacity_file="multiple_sources_gosm_test/BPA/data/manual_ub.dat",
+	time_step="H");
+Source(Wind2,
+	actuals_file="multiple_sources_gosm_test/BPA/data/2012-2013_BPA_forecasts_actuals.csv",
+	forecasts_file="multiple_sources_gosm_test/BPA/data/2012-2013_BPA_forecasts_actuals.csv",
+	source_type="wind",
+	segmentation_file="multiple_sources_gosm_test/segment_bpa.txt",
+	capacity_file="multiple_sources_gosm_test/BPA/data/manual_ub.dat",
+	time_step="H");
+Source(Wind3,
+	actuals_file="multiple_sources_gosm_test/BPA/data/2012-2013_BPA_forecasts_actuals.csv",
+	forecasts_file="multiple_sources_gosm_test/BPA/data/2012-2013_BPA_forecasts_actuals.csv",
+	source_type="wind",
+	segmentation_file="multiple_sources_gosm_test/segment_bpa.txt",
+	capacity_file="multiple_sources_gosm_test/BPA/data/manual_ub.dat",
+	time_step="H");
+Source(Bus1,
+	actuals_file="multiple_sources_gosm_test/BPA/data/CAiso-TAC_demand_12-15.csv",
+	forecasts_file="multiple_sources_gosm_test/BPA/data/CAiso-TAC_demand_12-15.csv",
+	source_type="load",
+	segmentation_file="multiple_sources_gosm_test/no_segmentation.txt",
+	time_step="H");
+
